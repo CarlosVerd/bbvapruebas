@@ -1,0 +1,162 @@
+<Module>
+<ModulePrefs title="marbles menu" title_url="https://sites.google" description="jquery marbles menu" thumbnail="http://www.gstatic.com/sites-gadgets/common/images/sites-icon-gadget-thumb.png" screenshot="http://www.gstatic.com/sites-gadgets/common/images/sites-icon-gadget-ss.png" height="800" width="200" author="inigo elejalde">
+<Require feature="setprefs"/>
+</ModulePrefs>
+<UserPref name="embed_input_left" display_name="Embedding input left" required="true"/>
+<Content type="html" view="home">
+<![CDATA[
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://inigoea.github.io/gadgets/marbles/css/bootstrap.css" rel="stylesheet">
+	<link href="https://inigoea.github.io/gadgets/marbles/css/marbles.css" rel="stylesheet">
+	<style>
+	.modal-backdrop.in{
+		opacity: 0 !important;
+	}
+	</style>
+	</div> 
+	<script type="text/javascript"> 
+		function onLoad() {
+			var prefs = new _IG_Prefs();
+			var obj = prefs.getArray('embed_input_left');
+			var name = "";
+			$.each( obj, function(idx, item){
+				if((idx+1)%2==0){
+					//url
+					var boton = "<button type=\"button\" class=\"btn btn-primary btn-round\" onclick=\"redirect('" + item + "')\"><font size=\"1\">" + name + "</font></button>";
+					$('#left_buttons').append(boton);
+				}else{
+					//name
+					name = item;
+				}
+				console.log("embed_input_left value is: " + item);
+        $.each( obj, function(idx, item){
+				if((idx+1)%2==0){
+					//url
+					var boton = "<button type=\"button\" class=\"btn btn-primary btn-round\" onclick=\"redirect('" + item + "')\"><font size=\"1\">" + name + "</font></button>";
+					$('#right_buttons').append(boton);
+				}else{
+					//name
+					name = item;
+				}
+				console.log("embed_input_right value is: " + item);
+			});	
+		};
+		function redirect(url){
+			window.top.location.href = url;
+		}
+		
+		gadgets.util.registerOnLoadHandler(onLoad); 
+	</script>
+	<script>
+		$(document).ready(function(){
+			//Nothing to do
+		});	
+	</script>
+	
+	<div style="width: 50%;float: left;" id="left_buttons">
+	</div>
+	<div style="width: 50%;float: right;" id="right_buttons"
+	</div>
+	<img style="width: 100%;" src="https://inigoea.github.io/gadgets/marbles/img/cabecera.png">
+]]>
+</Content>
+<Content type="html" view="configuration" preferred_height="240">
+<![CDATA[
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+var totalLine = 0;
+function loadData() {
+		var prefs = new _IG_Prefs();
+		var result = prefs.getArray('embed_input_left');	
+		$.each( result, function(idx, item){
+			if((idx+1)%2==0){
+				console.log("#url_"+(idx-(totalLine+1)));
+				$('body').find("#url_"+(idx-(totalLine+1))).val(item);
+			}else{
+				if(idx > 0){addLine();}
+				console.log("#name_"+idx-totalLine);
+				console.log($('body').find("#name_"+(idx-totalLine)));
+				$('body').find("#name_"+(idx-totalLine)).val(item);
+			}
+		});
+	}
+	
+function addLine(){
+	totalLine++;
+	console.log("addLine" + totalLine);
+	divString = "<div style=\"margin-top: 10px;\" id=\"left_menu_div_"+totalLine+"\">\
+		<input id=\"name_"+totalLine+"\" class=\"input_data\" type=\"text\" style=\"width: 40%\"></input>\
+		<input id=\"url_"+totalLine+"\" class=\"input_data\" type=\"text\" style=\"width: 40%\"></input>\
+		<button style=\"width: 10%\" onclick=\"removeLine("+totalLine+")\">Del</button>\
+	</div>";
+	$("#left_menu_div").append(divString);
+	}
+function addLine(){
+	totalLine++;
+	console.log("addLine" + totalLine);
+	divString = "<div style=\"margin-top: 10px;\" id=\"left_menu_div_"+totalLine+"\">\
+		<input id=\"name_"+totalLine+"\" class=\"input_data\" type=\"text\" style=\"width: 40%\"></input>\
+		<input id=\"url_"+totalLine+"\" class=\"input_data\" type=\"text\" style=\"width: 40%\"></input>\
+		<button style=\"width: 10%\" onclick=\"removeLine("+totalLine+")\">Del</button>\
+	</div>";
+	$("#right_menu_div").append(divString);
+	}
+function removeLine(line){
+	console.log("remove line: "+line);
+	$( "#left_menu_div_"+line ).remove();
+	}
+function removeLine(line){
+	console.log("remove line: "+line);
+	$( "#right_menu_div_"+line ).remove();
+	}
+ 
+function registerHandlers() {
+	 loadData();
+	 var prefs = new gadgets.Prefs();
+	 var items = [];
+	 
+	 var handler = function() {
+		items = [];
+		$('input').each(function(idx, item){
+			items.push(item.value);
+			console.log("item.value: " + item.value);
+		}); 
+		console.log("items values are: " + items);
+		prefs.setArray('embed_input_left', items);
+	 }; 
+	 $('#saveButton').click(handler); 
+ }
+ gadgets.util.registerOnLoadHandler(registerHandlers);
+</script>
+Marbles Left:<br />
+<div><div style="width: 40% ;float:left;text-align:center;">Name</div>
+<div style="width: 60% ;float:right;text-align:center;">URL</div></div>
+<div id="left_menu_div" style="margin-bottom: 10px; margin-top: 10px;">
+	<div id="left_menu_div_0">
+		<input id="name_0" class="input_data" type="text" style="width: 40%" ></input>
+		<input id="url_0" class="input_data" type="text" style="width: 40%" ></input>
+		<button style="width: 10%" onclick="removeLine(0)">Del</button>
+	</div>
+</div>
+<div sytle="margin-top: 20px;">
+	<button style="width: 10% ;float:left;" onclick="addLine()">Add</button>
+	<button id="saveButton" style="width: 10% float:right;background:#99ff99;">Save</button>
+</div>
+Marbles Right:<br />
+<div><div style="width: 40% ;float:right;text-align:center;">Name</div>
+<div style="width: 60% ;float:right;text-align:center;">URL</div></div>
+<div id="left_menu_div" style="margin-bottom: 10px; margin-top: 10px;">
+	<div id="left_menu_div_0">
+		<input id="name_0" class="input_data" type="text" style="width: 40%" ></input>
+		<input id="url_0" class="input_data" type="text" style="width: 40%" ></input>
+		<button style="width: 10%" onclick="removeLine(0)">Del</button>
+	</div>
+</div>
+<div sytle="margin-top: 20px;">
+	<button style="width: 10% ;float:left;" onclick="addLine()">Add</button>
+	<button id="saveButton" style="width: 10% float:right;background:#99ff99;">Save</button>
+</div>
+]]>
+</Content>
+</Module>
