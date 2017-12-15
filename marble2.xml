@@ -46,8 +46,7 @@
 	
 	<div style="width: 50%;float: left;" id="left_buttons">
 	</div>
-	<div class="float:right" id="right_buttons">
-		<button style="float: right;" type="button" class="btn btn-primary btn-round btn-ARQ" onclick="redirect('https://sites.google.com/a/bbva.com/arquitectura-ingenieria-espana/')"><font size="1">Arq España</font></button>
+	<div style="width: 50%;class="float:right" id="right_buttons">
 	</div>
 
 ]]>
