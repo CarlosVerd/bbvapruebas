@@ -7,8 +7,8 @@
 <![CDATA[
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="raw.githubusercontent.com/CarlosVerd/bbvapruebas/master/marbles/css/bootstrap.css" rel="stylesheet">
-	<link href="raw.githubusercontent.com/CarlosVerd/bbvapruebas/master/marbles/css/marbles.css" rel="stylesheet">
+    <link href="https://inigoea.github.io/gadgets/marbles/css/bootstrap.css" rel="stylesheet">
+	<link href="https://inigoea.github.io/gadgets/marbles/css/marbles.css" rel="stylesheet">
 	<style>
 	.modal-backdrop.in{
 		opacity: 0 !important;
@@ -43,13 +43,13 @@
 			//Nothing to do
 		});	
 	</script>
+	
 	<div style="width: 50%;float: left;" id="left_buttons">
 	</div>
 	<div class="float:right" id="right_buttons">
 		<button style="float: right;" type="button" class="btn btn-primary btn-round btn-ARQ" onclick="redirect('https://sites.google.com/a/bbva.com/arquitectura-ingenieria-espana/')"><font size="1">Arq España</font></button>
 	</div>
-		<img style="width: 100%;" src="https://inigoea.github.io/gadgets/marbles/img/cabecera.png">
-
+	<img style="width: 100%;" src="https://inigoea.github.io/gadgets/marbles/img/cabecera.png">
 
 
 ]]>
@@ -58,7 +58,9 @@
 <![CDATA[
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 var totalLine = 0;
+
 function loadData() {
 		var prefs = new _IG_Prefs();
 		var result = prefs.getArray('embed_input_left');	
@@ -74,6 +76,7 @@ function loadData() {
 			}
 		});
 	}
+
 	
 function addLine(){
 	totalLine++;
@@ -85,6 +88,7 @@ function addLine(){
 	</div>";
 	$("#left_menu_div").append(divString);
 	}
+
 function removeLine(line){
 	console.log("remove line: "+line);
 	$( "#left_menu_div_"+line ).remove();
@@ -108,6 +112,7 @@ function registerHandlers() {
  }
  gadgets.util.registerOnLoadHandler(registerHandlers);
 </script>
+
 Marbles Left:<br />
 <div><div style="width: 40% ;float:left;text-align:center;">Name</div>
 <div style="width: 60% ;float:right;text-align:center;">URL</div></div>
